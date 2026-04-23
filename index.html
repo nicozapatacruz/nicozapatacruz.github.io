@@ -25,7 +25,7 @@
       --max: 1120px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: var(--sans);
@@ -496,6 +496,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
+      .hero { overflow: hidden; }
+      .hero-number { display: none; }
       .about-strip { grid-template-columns: 1fr; }
       .about-left { border-right: none; border-bottom: 0.5px solid var(--border); }
 
