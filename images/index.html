@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nicolás Zapata — UX Designer & Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F4F1EB;
+      --bg2: #EDE9E1;
+      --ink: #0E0E0C;
+      --ink2: #5A5950;
+      --ink3: #9A9890;
+      --accent: #2B4FFF;
+      --accent-light: #E8ECFF;
+      --border: rgba(14,14,12,0.10);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 12px;
+      --max: 1120px;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 3.5rem);
+      height: 64px;
+      background: rgba(244,241,235,0.80);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.825rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-cta {
+      font-size: 0.825rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 clamp(1.5rem, 5vw, 3.5rem);
+      padding-bottom: 5rem;
+      padding-top: 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.1s forwards;
+    }
+
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 7.5vw, 7rem);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 900px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--ink2);
+      max-width: 540px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.35s forwards;
+    }
+
+    .hero-actions {
+      margin-top: 2.5rem;
+      display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--ink);
+      color: var(--bg);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.85rem 1.75rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--ink2);
+      font-size: 0.9rem;
+      font-weight: 400;
+      padding: 0.85rem 1.75rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--ink3); }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem; right: clamp(1.5rem, 5vw, 3.5rem);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s 1s forwards;
+    }
+    .hero-scroll-hint span {
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink3); writing-mode: vertical-rl;
+    }
+    .scroll-line {
+      width: 1px; height: 48px; background: var(--ink3);
+      animation: scrollLine 1.4s 1.2s ease-in-out infinite;
+    }
+
+    /* big decorative number */
+    .hero-number {
+      position: absolute;
+      right: clamp(1.5rem, 5vw, 3.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--serif);
+      font-size: clamp(14rem, 22vw, 22rem);
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(14,14,12,0.07);
+      user-select: none;
+      pointer-events: none;
+      opacity: 0;
+      animation: fadeIn 1.2s 0.5s forwards;
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 6rem clamp(1.5rem, 5vw, 3.5rem); }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .about-left {
+      padding: 5rem clamp(1.5rem, 5vw, 3.5rem);
+      border-right: 0.5px solid var(--border);
+    }
+
+    .about-right {
+      padding: 5rem clamp(1.5rem, 5vw, 3.5rem);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    .about-bio {
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--ink2);
+      max-width: 480px;
+    }
+
+    .about-bio strong { font-weight: 500; color: var(--ink); }
+
+    .skills-grid {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .skill-pill {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--ink2);
+      border: 0.5px solid var(--border);
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      background: var(--bg);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .skill-pill:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* ── WORK SECTION ── */
+    .work-section { background: var(--bg); }
+
+    .work-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 3rem;
+      flex-wrap: wrap; gap: 1rem;
+    }
+
+    /* ── PROJECT CARDS ── */
+    .projects-list { display: flex; flex-direction: column; gap: 0; }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 0.5px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .project-row:first-child { border-top: 0.5px solid var(--border); }
+    .project-row::before {
+      content: '';
+      position: absolute; inset: 0 -3.5rem;
+      background: var(--bg2);
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .project-row:hover::before { opacity: 1; }
+
+    .project-num {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--ink3);
+      position: relative; z-index: 1;
+    }
+
+    .project-info { position: relative; z-index: 1; }
+
+    .project-name {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+    .project-row:hover .project-name { color: var(--accent); }
+
+    .project-tags {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink3);
+    }
+    .tag + .tag::before { content: '·'; margin-right: 0.5rem; }
+
+    .project-arrow {
+      font-size: 1.2rem;
+      color: var(--ink3);
+      position: relative; z-index: 1;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .project-row:hover .project-arrow { transform: translate(4px, -4px); color: var(--accent); }
+
+    .project-metric {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      margin-top: 0.3rem;
+      display: inline-block;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-section {
+      background: var(--bg2);
+      border-top: 0.5px solid var(--border);
+    }
+
+    .exp-grid { display: flex; flex-direction: column; gap: 0; margin-top: 3rem; }
+
+    .exp-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 140px;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 1.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .exp-row:first-child { border-top: 0.5px solid var(--border); }
+
+    .exp-company {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .exp-role {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .exp-desc {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.6;
+    }
+
+    .exp-date {
+      font-size: 0.78rem;
+      color: var(--ink3);
+      text-align: right;
+      padding-top: 0.15rem;
+    }
+
+    .exp-current {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: #D6FFE8;
+      color: #1A7A40;
+      padding: 0.15rem 0.5rem;
+      border-radius: 100px;
+      margin-top: 0.3rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--ink);
+      border-top: none;
+    }
+
+    .contact-section .section-label { color: rgba(255,255,255,0.4); }
+    .contact-section .section-title { color: #fff; }
+
+    .contact-inner {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      flex-wrap: wrap; gap: 2rem;
+    }
+
+    .contact-email {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      color: #fff;
+      text-decoration: none;
+      margin-top: 1.5rem;
+      transition: color 0.2s;
+      letter-spacing: -0.02em;
+    }
+    .contact-email:hover { color: rgba(255,255,255,0.6); }
+
+    .social-links { display: flex; gap: 1rem; }
+
+    .social-link {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      border: 0.5px solid rgba(255,255,255,0.2);
+      padding: 0.6rem 1.1rem;
+      border-radius: 100px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .social-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 0.5px solid rgba(255,255,255,0.08);
+      padding: 1.5rem clamp(1.5rem, 5vw, 3.5rem);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* Scroll-triggered fade */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { overflow: hidden; }
+      .hero-number { display: none; }
+      .about-strip { grid-template-columns: 1fr; }
+      .about-left { border-right: none; border-bottom: 0.5px solid var(--border); }
+
+      .project-row { grid-template-columns: 40px 1fr auto; gap: 1rem; }
+
+      .exp-row { grid-template-columns: 1fr; gap: 0.25rem; }
+      .exp-date { text-align: left; }
+
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#top">NZ</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Let's talk</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-number" aria-hidden="true">N</div>
+
+    <div class="hero-eyebrow">UX Designer · Product Design Engineer · Full Stack Developer</div>
+
+    <h1 class="hero-headline">
+      Making products<br>
+      that <em>actually</em><br>
+      work for people.
+    </h1>
+
+    <p class="hero-sub">
+      I'm Nicolás — based in Madrid, Spain. I close the gap between
+      design and engineering, bridging research, interaction design, and
+      full-stack development into products people find intuitive.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn-primary" href="#work">See my work ↓</a>
+      <a class="btn-ghost" href="https://www.linkedin.com/in/nicolaszapatacruz/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn-ghost" href="https://github.com/nicozapatacruz" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ABOUT STRIP -->
+  <div class="about-strip" id="about">
+    <div class="about-left reveal">
+      <div class="section-label">About me</div>
+      <h2 class="section-title" style="margin-bottom:1.5rem">Colombian designer<br>with an engineer's<br><em style="font-style:italic">mind.</em></h2>
+      <p class="about-bio">
+        I studied <strong>Product Design Engineering at EAFIT University</strong> and earned a
+        <strong>Master's in UX from UDIT Madrid</strong>. That mix — industrial design thinking
+        combined with hands-on engineering — means I prototype in Figma and
+        ship in Next.js. I've worked as a designer, coordinator, and CTO,
+        so I understand every seat at the table.
+      </p>
+      <p class="about-bio" style="margin-top:1rem">
+        Currently based in <strong>Madrid</strong>, working in the intersection of design systems,
+        component design, and frontend development. My passion is finding the most
+        <strong>effective and efficient</strong> way to make products satisfy real human needs.
+        There's always a way to make something better — and I'm obsessed with finding it.
+      </p>
+    </div>
+    <div class="about-right reveal" style="transition-delay:0.12s">
+      <div class="section-label">Skills</div>
+      <div class="skills-grid">
+        <span class="skill-pill">UX Research</span>
+        <span class="skill-pill">Interaction Design</span>
+        <span class="skill-pill">Figma</span>
+        <span class="skill-pill">Prototyping</span>
+        <span class="skill-pill">Usability Testing</span>
+        <span class="skill-pill">Information Architecture</span>
+        <span class="skill-pill">Next.js</span>
+        <span class="skill-pill">React</span>
+        <span class="skill-pill">Node.js</span>
+        <span class="skill-pill">PostgreSQL</span>
+        <span class="skill-pill">Web Scraping</span>
+        <span class="skill-pill">HTML / CSS / JS</span>
+        <span class="skill-pill">Design Systems</span>
+        <span class="skill-pill">IoT / Edge Computing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <section class="work-section" id="work">
+    <div class="work-header reveal">
+      <div>
+        <div class="section-label">Selected work</div>
+        <h2 class="section-title">Projects that<br>shipped.</h2>
+      </div>
+    </div>
+
+    <div class="projects-list">
+
+      <a class="project-row reveal" href="work/neurored.html">
+        <div class="project-num">01</div>
+        <div class="project-info">
+          <div class="project-name">Neurored</div>
+          <div class="project-tags">
+            <span class="tag">UX Design</span>
+            <span class="tag">Design System</span>
+            <span class="tag">Frontend</span>
+          </div>
+          <div class="project-metric">Design system for global logistics platform</div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+      <a class="project-row reveal" href="work/prime-scout.html" style="transition-delay:0.05s">
+        <div class="project-num">02</div>
+        <div class="project-info">
+          <div class="project-name">Prime Scout</div>
+          <div class="project-tags">
+            <span class="tag">Full Stack Dev</span>
+            <span class="tag">CTO</span>
+            <span class="tag">Product</span>
+          </div>
+          <div class="project-metric">90% of scouting automated</div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+      <a class="project-row reveal" href="work/singular-things.html" style="transition-delay:0.10s">
+        <div class="project-num">03</div>
+        <div class="project-info">
+          <div class="project-name">Singular Things</div>
+          <div class="project-tags">
+            <span class="tag">UX Design</span>
+            <span class="tag">IoT Dashboard</span>
+            <span class="tag">Figma</span>
+          </div>
+          <div class="project-metric">2 products designed in 2 months</div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+      <a class="project-row reveal" href="work/master-ux.html" style="transition-delay:0.15s">
+        <div class="project-num">04</div>
+        <div class="project-info">
+          <div class="project-name">Master in UX</div>
+          <div class="project-tags">
+            <span class="tag">Research</span>
+            <span class="tag">Service Design</span>
+            <span class="tag">UDIT Madrid</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+      <a class="project-row reveal" href="work/neu.html" style="transition-delay:0.20s">
+        <div class="project-num">05</div>
+        <div class="project-info">
+          <div class="project-name">NEU Energy</div>
+          <div class="project-tags">
+            <span class="tag">Frontend Dev</span>
+            <span class="tag">Energy Tech</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+      <a class="project-row reveal" href="work/bachelors.html" style="transition-delay:0.25s">
+        <div class="project-num">06</div>
+        <div class="project-info">
+          <div class="project-name">Product Design Engineering</div>
+          <div class="project-tags">
+            <span class="tag">Engineering</span>
+            <span class="tag">EAFIT University</span>
+            <span class="tag">Bachelor's</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="exp-section" id="experience">
+    <div class="reveal">
+      <div class="section-label">Experience</div>
+      <h2 class="section-title">Where I've been.</h2>
+    </div>
+
+    <div class="exp-grid">
+
+      <div class="exp-row reveal">
+        <div>
+          <div class="exp-company">Neurored</div>
+          <span class="exp-current">Current</span>
+        </div>
+        <div>
+          <div class="exp-role">UX Designer — Design Team</div>
+          <div class="exp-desc">Designing and maintaining components for the company's Design System in Figma, including variants, states, and documentation. Also bridging design and code by maqueting these components in the frontend — replacing raw HTML with proper, reusable component instances across the platform. Neurored is a TMS & SCM software for global logistics, used by enterprises like XPO and Hapag-Lloyd.</div>
+        </div>
+        <div class="exp-date">Oct 2025 — Now</div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div>
+          <div class="exp-company">Prime Scout</div>
+        </div>
+        <div>
+          <div class="exp-role">CTO — Web Development</div>
+          <div class="exp-desc">Led the full tech stack from scratch: Puppeteer-based web scraping, Next.js app (frontend + backend), PostgreSQL on AWS RDS. Delivered v1.0 automating 90% of the scouting workflow.</div>
+        </div>
+        <div class="exp-date">Dec 2024 — Sep 2025</div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-company">Singular Things</div>
+        <div>
+          <div class="exp-role">UX Designer</div>
+          <div class="exp-desc">Designed two products in Figma: a cold-chain monitoring dashboard for a pharmaceutical client and a plug-in for the Gravity VCA Bus Compressor.</div>
+        </div>
+        <div class="exp-date">Jun – Jul 2024</div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-company">NEU Energy</div>
+        <div>
+          <div class="exp-role">Developer Jr</div>
+          <div class="exp-desc">Frontend development for an energy-sector platform, contributing to UI components and data visualisation features.</div>
+        </div>
+        <div class="exp-date">May 2022 – Aug 2023</div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-company">Kiwibot</div>
+        <div>
+          <div class="exp-role">Operations Launcher</div>
+          <div class="exp-desc">Coordinated autonomous delivery robot deployments, bridging operations, logistics, and on-site teams across multiple campuses.</div>
+        </div>
+        <div class="exp-date">Sep 2021 – Apr 2022</div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-company">Cheetah</div>
+        <div>
+          <div class="exp-role">Web Designer Jr</div>
+          <div class="exp-desc">Built and maintained web interfaces, translating design specs into responsive, production-ready HTML/CSS.</div>
+        </div>
+        <div class="exp-date">Jan – Jun 2021</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner reveal">
+      <div>
+        <div class="section-label">Get in touch</div>
+        <h2 class="section-title">Let's build<br>something good.</h2>
+        <a class="contact-email" href="mailto:nicozapatacruz@gmail.com">nicozapatacruz@gmail.com</a>
+      </div>
+      <div class="social-links">
+        <a class="social-link" href="https://www.linkedin.com/in/nicolaszapatacruz/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="social-link" href="https://github.com/nicozapatacruz" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Nicolás Zapata Cruz — Madrid, Spain</p>
+    <p>Designed & built by hand</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
