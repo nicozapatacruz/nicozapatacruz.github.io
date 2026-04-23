@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Nicolás Zapata</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F4F1EB; --bg2: #EDE9E1; --ink: #0E0E0C; --ink2: #5A5950; --ink3: #9A9890;
+      --accent: #2B4FFF; --accent-light: #E8ECFF; --border: rgba(14,14,12,0.10);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 3.5rem); height: 64px;
+      background: rgba(244,241,235,0.85); backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.825rem; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink2); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta { font-size: 0.825rem; font-weight: 500; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 0.4rem 1rem; border-radius: 100px; transition: background 0.2s, color 0.2s; }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+
+    /* HERO */
+    .hero {
+      padding-top: 130px; padding-bottom: 5rem;
+      padding-left: clamp(1.5rem, 5vw, 3.5rem);
+      padding-right: clamp(1.5rem, 5vw, 3.5rem);
+      border-bottom: 0.5px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.7s 0.1s forwards; }
+    .hero-title { font-family: var(--serif); font-size: clamp(3rem, 6vw, 5rem); line-height: 1.0; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1.75rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-bio { opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+    .hero-bio p { font-size: 1.05rem; font-weight: 300; line-height: 1.8; color: var(--ink2); margin-bottom: 1rem; }
+    .hero-bio p:last-child { margin-bottom: 0; }
+    .hero-bio p strong { font-weight: 500; color: var(--ink); }
+    .hero-photo { opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
+    .hero-photo img { width: 100%; border-radius: 16px; display: block; border: 0.5px solid var(--border); }
+
+    /* PERSONAL STRIP */
+    .personal-strip {
+      background: var(--ink);
+      padding: 4rem clamp(1.5rem, 5vw, 3.5rem);
+    }
+    .personal-strip p {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.7);
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .personal-strip p strong { font-weight: 500; color: #fff; }
+
+    /* SKILLS */
+    .skills-section {
+      padding: 5rem clamp(1.5rem, 5vw, 3.5rem);
+      border-bottom: 0.5px solid var(--border);
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .skills-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.65rem; }
+    .skills-title { font-family: var(--serif); font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); }
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; padding-top: 0.5rem; }
+    .skill-pill {
+      font-size: 0.9rem; font-weight: 400; color: var(--ink2);
+      border: 0.5px solid var(--border);
+      padding: 0.5rem 1.1rem; border-radius: 100px;
+      background: var(--bg);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .skill-pill:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* PHOTO GRID */
+    .photo-section {
+      padding: 0 clamp(1.5rem, 5vw, 3.5rem) 5rem;
+      border-bottom: 0.5px solid var(--border);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .photo-section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink3); margin-bottom: 1.5rem; }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+    .photo-grid img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      border-radius: 10px; display: block;
+      border: 0.5px solid var(--border);
+      transition: opacity 0.2s;
+    }
+    .photo-grid img:hover { opacity: 0.85; }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--bg2);
+      padding: 5rem clamp(1.5rem, 5vw, 3.5rem);
+      text-align: center;
+    }
+    .contact-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.75rem; }
+    .contact-title { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1rem; }
+    .contact-sub { font-size: 1rem; font-weight: 300; color: var(--ink2); margin-bottom: 2rem; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 1rem; font-weight: 500;
+      background: var(--ink); color: var(--bg);
+      padding: 0.9rem 2rem; border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .contact-email:hover { background: var(--accent); }
+    .social-row { display: flex; gap: 1rem; justify-content: center; margin-top: 1.25rem; }
+    .social-link { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink2); text-decoration: none; border: 0.5px solid var(--border); padding: 0.55rem 1.1rem; border-radius: 100px; transition: color 0.2s, border-color 0.2s; }
+    .social-link:hover { color: var(--ink); border-color: var(--ink3); }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink);
+      border-top: 0.5px solid rgba(255,255,255,0.08);
+      padding: 1.5rem clamp(1.5rem, 5vw, 3.5rem);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-photo { order: -1; max-width: 320px; }
+      .skills-section { grid-template-columns: 1fr; gap: 2rem; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">NZ</a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#about">About</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Let's talk</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Hey there!</div>
+      <h1 class="hero-title">I'm <em>Nicolás.</em></h1>
+      <div class="hero-bio">
+        <p>
+          A <strong>Colombian based in Madrid, Spain</strong>. I'm a Product Design Engineer
+          passionate about innovation, technology and design, with a special focus on
+          user experience.
+        </p>
+        <p>
+          My background combines <strong>engineering thinking with design sensibility</strong> —
+          I can prototype an idea in Figma and ship it in code. That overlap between
+          design and development is where I work best.
+        </p>
+        <p>
+          I like to keep learning and improving continuously, so I enjoy challenges and
+          working in a team. I adapt easily to both collaboration and independent work,
+          and I tend to take initiative and give my best to whatever I take on.
+        </p>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="images/about/ab-1.jpg" alt="Nicolás Zapata" />
+    </div>
+  </div>
+
+  <!-- PERSONAL -->
+  <div class="personal-strip">
+    <p>
+      I'm passionate about <strong>music, running, meditation and design</strong>.
+      I've pursued vocal technique, run races in Medellín and Madrid, and use meditation
+      and psychological support as tools for growth — not just wellbeing.
+      I consider myself a <strong>reliable, empathetic, and detail-oriented person</strong>
+      who genuinely believes you learn more from other people than from working alone.
+    </p>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="skills-section reveal">
+    <div>
+      <div class="skills-label">Skills</div>
+      <h2 class="skills-title">What I work with.</h2>
+    </div>
+    <div class="skills-grid">
+      <span class="skill-pill">UX Design</span>
+      <span class="skill-pill">Interaction Design</span>
+      <span class="skill-pill">Prototyping</span>
+      <span class="skill-pill">UX Research</span>
+      <span class="skill-pill">Information Architecture</span>
+      <span class="skill-pill">Design Systems</span>
+      <span class="skill-pill">Figma</span>
+      <span class="skill-pill">Salesforce</span>
+      <span class="skill-pill">Engineering</span>
+      <span class="skill-pill">HTML / CSS / JS</span>
+      <span class="skill-pill">Next.js</span>
+      <span class="skill-pill">React</span>
+      <span class="skill-pill">Node.js</span>
+      <span class="skill-pill">PostgreSQL</span>
+      <span class="skill-pill">Coding</span>
+    </div>
+  </div>
+
+  <!-- PHOTO GRID -->
+  <div class="photo-section reveal">
+    <div class="photo-section-label">A bit of life outside the screen</div>
+    <div class="photo-grid">
+      <img src="images/about/ab-2.jpg" alt="" loading="lazy" />
+      <img src="images/about/ab-3.jpg" alt="" loading="lazy" />
+      <img src="images/about/ab-4.jpg" alt="" loading="lazy" />
+      <img src="images/about/ab-5.jpg" alt="" loading="lazy" />
+      <img src="images/about/ab-6.jpg" alt="" loading="lazy" />
+      <img src="images/about/ab-7.jpg" alt="" loading="lazy" />
+      <img src="images/about/ab-8.jpg" alt="" loading="lazy" />
+      <img src="images/about/ab-9.jpg" alt="" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section reveal" id="contact">
+    <div class="contact-label">Get in touch</div>
+    <h2 class="contact-title">Let's build something good.</h2>
+    <p class="contact-sub">I'm sure we can work this out.</p>
+    <a class="contact-email" href="mailto:nicozapatacruz@gmail.com">nicozapatacruz@gmail.com ↗</a>
+    <div class="social-row">
+      <a class="social-link" href="https://www.linkedin.com/in/nicolaszapatacruz/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="social-link" href="https://github.com/nicozapatacruz" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Nicolás Zapata Cruz — Madrid, Spain</p>
+    <p>Designed & built by hand</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
