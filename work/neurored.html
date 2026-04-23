@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UX Design at Neurored — Nicolás Zapata</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F4F1EB; --bg2: #EDE9E1; --ink: #0E0E0C; --ink2: #5A5950; --ink3: #9A9890;
+      --accent: #2B4FFF; --accent-light: #E8ECFF; --border: rgba(14,14,12,0.10);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --max: 720px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+    
+    
+    
+    
+
+    /* HERO */
+    .hero {
+      padding-top: 130px; padding-bottom: 5rem;
+      padding-left: clamp(1.5rem, 5vw, 3.5rem); padding-right: clamp(1.5rem, 5vw, 3.5rem);
+      max-width: 1100px; margin: 0 auto; border-bottom: 0.5px solid var(--border);
+      display: grid; grid-template-columns: 1fr 260px; gap: 5rem; align-items: end;
+    }
+    .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); margin-bottom: 1.25rem; opacity: 0; animation: fadeUp 0.7s 0.1s forwards; }
+    .hero-title { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-meta { opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
+    .meta-item { margin-bottom: 1.4rem; }
+    .meta-item:last-child { margin-bottom: 0; }
+    .meta-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.3rem; }
+    .meta-value { font-size: 0.875rem; color: var(--ink); line-height: 1.55; }
+
+    /* CONTENT */
+    .content { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3.5rem); }
+    .section { padding: 3.5rem 0; border-bottom: 0.5px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.65rem; }
+    .section-title { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 1.9rem); line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1.5rem; }
+    p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--ink2); margin-bottom: 1.1rem; }
+    p:last-child { margin-bottom: 0; }
+    p strong { font-weight: 500; color: var(--ink); }
+
+    /* IMAGES */
+    .img-full { width: 100%; border-radius: 10px; border: 0.5px solid var(--border); display: block; margin: 1.75rem 0; background: var(--bg2); }
+    .img-caption { font-size: 0.78rem; color: var(--ink3); text-align: center; margin-top: -1rem; margin-bottom: 1.75rem; }
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.75rem 0; }
+    .img-pair img { width: 100%; border-radius: 8px; border: 0.5px solid var(--border); background: var(--bg2); }
+    .img-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin: 1.75rem 0; }
+    .img-trio img { width: 100%; border-radius: 8px; border: 0.5px solid var(--border); background: var(--bg2); }
+
+    /* INSIGHT */
+    .insight { background: var(--accent-light); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 1.1rem 1.25rem; margin: 1.75rem 0; }
+    .insight p { font-size: 0.925rem; color: var(--ink); margin: 0; }
+
+    /* PROCESS STEPS */
+    .flow-steps { margin: 2rem 0; display: flex; flex-direction: column; gap: 0; border-top: 0.5px solid var(--border); }
+    .flow-step { display: grid; grid-template-columns: 28px 1fr; gap: 1rem; padding: 1.1rem 0; border-bottom: 0.5px solid var(--border); align-items: start; }
+    .flow-num { font-family: var(--serif); font-size: 0.95rem; color: var(--ink3); padding-top: 2px; }
+    .flow-title { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 0.2rem; }
+    .flow-desc { font-size: 0.85rem; font-weight: 300; color: var(--ink2); line-height: 1.6; margin: 0; }
+
+    /* COMPONENT LIST */
+    .component-list { margin-top: 2rem; border-top: 0.5px solid var(--border); }
+    .component-item { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; padding: 1.5rem 0; border-bottom: 0.5px solid var(--border); }
+    .component-item:last-child { border-bottom: none; }
+    .component-name { font-size: 1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.35rem; }
+    .component-desc { font-size: 0.875rem; font-weight: 300; color: var(--ink2); line-height: 1.65; margin: 0; }
+    .component-tag { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 100px; white-space: nowrap; margin-top: 3px; }
+    .tag-new { background: #E8F5E9; color: #2E7D32; }
+    .tag-redesign { background: #FFF8E1; color: #E65100; }
+
+    /* REFLECTION */
+    .reflection { background: var(--ink); border-radius: 12px; padding: 2.25rem 2.5rem; }
+    .reflection p { color: rgba(255,255,255,0.7); font-size: 0.975rem; margin-bottom: 1rem; }
+    .reflection p:last-child { margin-bottom: 0; }
+    .reflection strong { color: #fff; font-weight: 500; }
+
+    /* FOOTER */
+    .page-
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 680px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; }
+      .img-pair { grid-template-columns: 1fr; }
+      .img-trio { grid-template-columns: 1fr; }
+      .component-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+
+  
+    /* ── PAGE FOOTER ── */
+    .page-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem clamp(1.5rem, 5vw, 3.5rem);
+      display: flex; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      border-top: 0.5px solid rgba(14,14,12,0.10);
+    }
+    .footer-link {
+      font-size: 0.875rem; color: #5A5950;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-link:hover { color: #2B4FFF; }
+  </style>
+  <script src="../components/nav-bar.js"></script>
+  <script src="../components/site-footer.js"></script>
+</head>
+<body>
+
+  <nav-bar base="../"></nav-bar>
+
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">UX Design · Neurored · Oct 2025 — Present</div>
+      <h1 class="hero-title">UX Design<br>at <em>Neurored.</em></h1>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-label">Company</div>
+        <div class="meta-value">Neurored — TMS & SCM software for global logistics</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">UX Designer — Design Team</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Focus</div>
+        <div class="meta-value">Product UX · Design System · Frontend</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Tools</div>
+        <div class="meta-value">Figma · LWC · HTML / CSS</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- CONTEXT -->
+    <div class="section reveal">
+      <div class="section-label">Context</div>
+      <h2 class="section-title">A complex logistics platform — and the people who operate it.</h2>
+      <p>
+        Neurored is a <strong>Transportation Management System (TMS) and Supply Chain Management
+        (SCM) platform</strong> used by global enterprises like XPO Logistics and Hapag-Lloyd.
+        Operators use it daily to manage freight forwarding, bookings, shipment documentation,
+        and supply chain visibility — all in one place.
+      </p>
+      <p>
+        I joined the design team in October 2025. My work covers two areas: <strong>designing
+        product interfaces</strong> for the platform's core workflows, and <strong>building and
+        maintaining components</strong> in Neu, Neurored's internal Design System — including
+        bridging those components into production code.
+      </p>
+    </div>
+
+    <!-- MAIN PROJECT: BOOKINGS + SI -->
+    <div class="section reveal">
+      <div class="section-label">Main project</div>
+      <h2 class="section-title">Redesigning Bookings and Shipping Instructions from scratch.</h2>
+      <p>
+        The most significant design project I've owned at Neurored is the full interface redesign
+        of <strong>Bookings</strong> and <strong>Shipping Instructions</strong> — two of the most
+        critical and complex workflows in the platform.
+      </p>
+      <p>
+        A <strong>Booking</strong> is the reservation of space with an airline, shipping line,
+        or carrier — a container on a vessel, a pallet on a flight. Without a confirmed booking,
+        there's no shipment. <strong>Shipping Instructions</strong> are the final data package
+        delivered to the carrier to issue the transport documents: Bill of Lading for ocean
+        freight, Air Waybill for air. If these instructions are wrong, documents come out
+        incorrect — and that means fines, delays, and customs problems.
+      </p>
+      <p>
+        Both workflows sit at the end of a long chain:
+        <strong>Customer Quote → Service Quote → Customer Order → Service Order → Booking → Shipping Instructions</strong>.
+        By the time an operator reaches Booking, a lot of decisions have already been made.
+        The interface had to reflect that context without overwhelming them.
+      </p>
+
+      <div class="insight">
+        <p><strong>What I inherited:</strong> a functional but poorly designed set of forms built by developers without UX involvement. Correct in terms of fields — but with no hierarchy, no information architecture, and no consideration for the cognitive load of the operator.</p>
+      </div>
+
+      <p>
+        I was handed the list of required fields and data for each workflow and asked to design
+        the interface from scratch in Figma, using components from LWC and from the Neu Design
+        System wherever they applied — and creating new ones where nothing existed yet.
+      </p>
+    </div>
+
+    <!-- BOOKINGS -->
+    <div class="section reveal">
+      <div class="section-label">Bookings</div>
+      <h2 class="section-title">A record interface that works at every stage of the process.</h2>
+      <p>
+        The Booking interface is a <strong>multi-tab record page</strong> — one of the most
+        information-dense patterns in the platform. The operator needs to see the booking's
+        status at a glance, navigate between sections of data without losing their place, and
+        take contextual actions depending on where the booking is in its lifecycle.
+      </p>
+      <p>
+        The key structural decisions I made: a <strong>status stepper</strong> at the top
+        (Draft → Requested → Pending Confirmation → Confirmed → Amendment → Shipping Instructions
+        → Rejected → Cancelled → Error) that gives the operator an immediate understanding
+        of where the booking stands. Below it, <strong>five tabs</strong> — General Details,
+        Parties, Cargo Details, Charges, and References — each scoped to a specific domain
+        of information, with a persistent lateral panel for Validations and Events.
+      </p>
+
+      <img
+        class="img-full"
+        src="../images/booking-general.png"
+        alt="Booking record — General Details tab with routing information"
+        loading="lazy"
+      />
+      <p class="img-caption">Booking record — General Details tab. Status stepper at the top, routing information structured into Receipt, Main Ocean, and Delivery sections.</p>
+
+      <p>
+        The <strong>Cargo Details</strong> tab was the most complex to design. Operators need
+        to manage multiple containers simultaneously, each with its own goods, dangerous goods
+        declarations, reefer configuration, and OOG (Out of Gauge) specifications. I structured
+        it as a <strong>summary table</strong> at the top — for scanning across containers —
+        and expandable sections below for editing each one individually.
+      </p>
+
+      <img
+        class="img-full"
+        src="../images/booking-cargo.png"
+        alt="Booking record — Cargo Details tab with container management"
+        loading="lazy"
+      />
+      <p class="img-caption">Cargo Details — summary table plus expandable container sections. Each container can have dangerous goods, reefer settings, and OOG details.</p>
+
+      <div class="img-pair">
+        <img src="../images/booking-parties.png" alt="Booking — Parties tab with activity events panel" loading="lazy" />
+        <img src="../images/booking-charges.png" alt="Booking — Charges tab" loading="lazy" />
+      </div>
+      <p class="img-caption">Parties tab showing the lateral Events panel — where the Activity Event component was born. Charges tab with inline editing.</p>
+
+      <img
+        class="img-full"
+        src="../images/booking-references.png"
+        alt="Booking — References tab"
+        loading="lazy"
+      />
+      <p class="img-caption">References tab — consistent inline editing pattern applied across all list-based sections.</p>
+
+      <div class="insight">
+        <p><strong>The Activity Event component was born here.</strong> Designing the Events panel in the Booking sidebar — where operators see a chronological log of what happened to the booking — made me realise there was no component in the Design System for this pattern. I designed it, documented it, and it became part of Neu.</p>
+      </div>
+    </div>
+
+    <!-- SHIPPING INSTRUCTIONS -->
+    <div class="section reveal">
+      <div class="section-label">Shipping Instructions</div>
+      <h2 class="section-title">A 7-step wizard for the most document-critical workflow.</h2>
+      <p>
+        While Bookings is a record page — something the operator returns to and edits over time —
+        Shipping Instructions needed a fundamentally different pattern. The operator fills it in
+        once, at a critical moment, and submits it to generate the transport documents. One mistake
+        means incorrect documents.
+      </p>
+      <p>
+        I chose a <strong>wizard modal with a 7-step progress stepper</strong>: General Details →
+        Parties → Cargo Details → References → BL Instructions → Validations → Preview.
+        The stepped structure forces the operator through each section in a logical sequence,
+        reduces the chance of missing something, and makes the current position in the process
+        always visible.
+      </p>
+
+      <img
+        class="img-full"
+        src="../images/si-general.png"
+        alt="Shipping Instructions wizard — General Details step"
+        loading="lazy"
+      />
+      <p class="img-caption">Shipping Instructions — General Details step. The modal wizard keeps the operator focused on one section at a time.</p>
+
+      <div class="img-pair">
+        <img src="../images/si-parties.png" alt="Shipping Instructions — Parties step" loading="lazy" />
+        <img src="../images/si-cargo.png" alt="Shipping Instructions — Cargo Details step" loading="lazy" />
+      </div>
+      <p class="img-caption">Parties step with Shipper, Consignee, Forwarder, and additional roles. Cargo Details showing container and goods information per container.</p>
+
+      <div class="img-pair">
+        <img src="../images/si-references.png" alt="Shipping Instructions — References step" loading="lazy" />
+        <img src="../images/si-bl.png" alt="Shipping Instructions — BL Instructions step" loading="lazy" />
+      </div>
+      <p class="img-caption">References step. BL Instructions step — freight charges, BL type, Bill of Lading clauses, and release settings.</p>
+
+      <img
+        class="img-full"
+        src="../images/si-validations.png"
+        alt="Shipping Instructions — Validations step"
+        loading="lazy"
+      />
+      <p class="img-caption">Validations step — errors and warnings shown using the Section Card component with semantic color coding before the operator can proceed to Preview.</p>
+
+      <p>
+        Every section reuses components from the Neu Design System — Section Cards for
+        container groupings, inline editing patterns from the Booking design, and the
+        same Parties structure adapted to the SI context. Consistency between Bookings
+        and Shipping Instructions was a deliberate goal: operators who know one should
+        immediately feel at home in the other.
+      </p>
+    </div>
+
+    <!-- DESIGN SYSTEM -->
+    <div class="section reveal">
+      <div class="section-label">Design System</div>
+      <h2 class="section-title">Components that came from — and feed back into — the product.</h2>
+      <p>
+        Working on Bookings and Shipping Instructions wasn't just a product design project —
+        it directly informed what components the Design System needed. When a pattern appeared
+        multiple times across both interfaces, it became a candidate for a new component.
+        When an existing component didn't quite fit the context, I redesigned it.
+      </p>
+      <p>
+        My day-to-day also includes <strong>maqueting components in the frontend</strong> —
+        replacing raw HTML instances across the platform with proper Design System component
+        calls in Lightning Web Components. Working in both Figma and code gives me a perspective
+        most designers don't have: I know exactly what a design decision costs to implement.
+      </p>
+
+      <div class="component-list">
+        <div class="component-item">
+          <div>
+            <div class="component-name">Activity Event</div>
+            <p class="component-desc">Born from the Events panel in Booking. A chronological component for activity feeds, audit logs, and case histories, with a semantic state system — base, info, warning, error, success — controlling icon, background, and timeline line color simultaneously. Fully designed and documented from scratch.</p>
+          </div>
+          <span class="component-tag tag-new">New</span>
+        </div>
+        <div class="component-item">
+          <div>
+            <div class="component-name">Relationship Card</div>
+            <p class="component-desc">Visual container for one-way relationships between records — Quote to Order, Booking to Shipment. Redesigned with a color-coded directional connector encoding match quality. Also maqueted in frontend code.</p>
+          </div>
+          <span class="component-tag tag-redesign">Redesign + code</span>
+        </div>
+        <div class="component-item">
+          <div>
+            <div class="component-name">Section Card</div>
+            <p class="component-desc">The primary container for workflow screens — used extensively in Bookings and Shipping Instructions. Redesigned the left border system to encode transport mode through color and icon, standardized action overflow at 5+ buttons. Maqueted in the codebase.</p>
+          </div>
+          <span class="component-tag tag-redesign">Redesign + code</span>
+        </div>
+        <div class="component-item">
+          <div>
+            <div class="component-name">Section Container</div>
+            <p class="component-desc">Page-level layout component in Large and Small variants. Redesigned and restructured in Figma to clarify hierarchy and standardize the three accordion variants: open, closed, and always-expanded.</p>
+          </div>
+          <span class="component-tag tag-redesign">Redesign</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- REFLECTION -->
+    <div class="section reveal">
+      <div class="section-label">Reflection</div>
+      <h2 class="section-title">What this work is teaching me.</h2>
+      <div class="reflection">
+        <p>
+          Designing for logistics operators is designing for specialists. They know their domain
+          far better than I do — my job is to understand their mental model well enough to
+          <strong>get out of their way</strong>. A Booking form isn't an onboarding experience.
+          The operator has done this hundreds of times. Every unnecessary click, every ambiguous
+          label, every inconsistent pattern is friction that accumulates across their entire day.
+        </p>
+        <p>
+          The most valuable thing I've learned here is that <strong>complexity can't always be
+          simplified — it can only be organized</strong>. A Booking has many fields because
+          a real booking has many variables. The design challenge isn't reducing them; it's
+          making them navigable, scannable, and consistent so the operator can move through
+          them with confidence.
+        </p>
+        <p>
+          Seeing the Activity Event component go from a need I identified in the Booking sidebar
+          to a documented, reusable part of the Design System — that's the kind of feedback loop
+          I want to keep building: <strong>product work that makes the system better,
+          and a system that makes the product work easier to build</strong>.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <a class="footer-link" href="../index.html">← All work</a>
+    <a class="footer-link" href="prime-scout.html">Next: Prime Scout →</a>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+  
+</body>
+</html>
