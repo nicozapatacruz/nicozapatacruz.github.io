@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prime Scout — Nicolás Zapata</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F4F1EB;
+      --bg2: #EDE9E1;
+      --ink: #0E0E0C;
+      --ink2: #5A5950;
+      --ink3: #9A9890;
+      --accent: #2B4FFF;
+      --accent-light: #E8ECFF;
+      --border: rgba(14,14,12,0.10);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --max: 720px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    
+    
+    
+    
+
+    /* HERO */
+    .hero {
+      padding-top: 130px;
+      padding-bottom: 5rem;
+      padding-left: clamp(1.5rem, 5vw, 3.5rem);
+      padding-right: clamp(1.5rem, 5vw, 3.5rem);
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 0.5px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 5rem;
+      align-items: end;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink3); margin-bottom: 1.25rem;
+      opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.05; letter-spacing: -0.02em;
+      color: var(--ink);
+      opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-meta { opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
+    .meta-item { margin-bottom: 1.4rem; }
+    .meta-item:last-child { margin-bottom: 0; }
+    .meta-label {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink3); margin-bottom: 0.3rem;
+    }
+    .meta-value { font-size: 0.875rem; color: var(--ink); line-height: 1.55; }
+
+    /* METRIC PILLS */
+    .metric-row {
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+      margin-top: 2rem;
+      opacity: 0; animation: fadeUp 0.8s 0.45s forwards;
+    }
+    .metric {
+      display: flex; flex-direction: column;
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      padding: 0.75rem 1.25rem; border-radius: 10px;
+    }
+    .metric-number {
+      font-family: var(--serif); font-size: 1.5rem;
+      color: var(--ink);
+      line-height: 1; letter-spacing: -0.02em;
+    }
+    .metric-label { font-size: 0.75rem; color: var(--ink3); margin-top: 0.2rem; }
+
+    /* CONTENT */
+    .content {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 3.5rem);
+    }
+
+    .section { padding: 3.5rem 0; border-bottom: 0.5px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink3); margin-bottom: 0.65rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+      line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1.5rem;
+    }
+    p {
+      font-size: 1rem; font-weight: 300; line-height: 1.8;
+      color: var(--ink2); margin-bottom: 1.1rem;
+    }
+    p:last-child { margin-bottom: 0; }
+    p strong { font-weight: 500; color: var(--ink); }
+
+    /* IMAGES */
+    .img-full {
+      width: 100%; border-radius: 10px;
+      border: 0.5px solid var(--border);
+      display: block; margin: 2rem 0;
+      background: var(--bg2);
+    }
+    .img-caption {
+      font-size: 0.78rem; color: var(--ink3);
+      text-align: center; margin-top: -1.25rem;
+      margin-bottom: 2rem;
+    }
+    .img-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem; margin: 2rem 0;
+    }
+    .img-grid img {
+      width: 100%; border-radius: 8px;
+      border: 0.5px solid var(--border);
+      background: var(--bg2);
+    }
+
+    /* PROCESS STEPS */
+    .process-steps {
+      margin: 2rem 0;
+      border-top: 0.5px solid var(--border);
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 0.5px solid var(--border);
+      align-items: start;
+    }
+    .step-num {
+      font-family: var(--serif);
+      font-size: 1rem; color: var(--ink3);
+      padding-top: 2px;
+    }
+    .step-title {
+      font-size: 0.9rem; font-weight: 500;
+      color: var(--ink); margin-bottom: 0.3rem;
+    }
+    .step-desc {
+      font-size: 0.875rem; font-weight: 300;
+      color: var(--ink2); line-height: 1.65; margin: 0;
+    }
+
+    /* TECH STACK */
+    .stack-row {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .stack-pill {
+      font-size: 0.8rem; color: var(--ink2);
+      border: 0.5px solid var(--border);
+      padding: 0.3rem 0.85rem; border-radius: 100px;
+      background: var(--bg);
+    }
+
+    /* INSIGHT */
+    .insight {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1.1rem 1.25rem;
+      margin: 1.75rem 0;
+    }
+    .insight p { font-size: 0.925rem; color: var(--ink); margin: 0; }
+
+    /* REFLECTION */
+    .reflection {
+      background: var(--ink); border-radius: 12px;
+      padding: 2.25rem 2.5rem;
+    }
+    .reflection p { color: rgba(255,255,255,0.7); font-size: 0.975rem; margin-bottom: 1rem; }
+    .reflection p:last-child { margin-bottom: 0; }
+    .reflection strong { color: #fff; font-weight: 500; }
+
+    /* FOOTER */
+    .page-
+    .footer-link {
+      font-size: 0.875rem; color: var(--ink2);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--accent); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 680px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; }
+      .img-grid { grid-template-columns: 1fr; }
+      .metric-row { gap: 0.5rem; }
+    }
+
+    </style>
+  <script src="../components/nav-bar.js"></script>
+  <script src="../components/site-footer.js"></script>
+</head>
+<body>
+
+  <nav-bar base="../"></nav-bar>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">CTO · Full Stack Development · Dec 2024 — Sep 2025</div>
+      <h1 class="hero-title">Automating<br>competitive<br><em>price intelligence.</em></h1>
+      <div class="metric-row">
+        <div class="metric">
+          <span class="metric-number">90%</span>
+          <span class="metric-label">of scouting automated</span>
+        </div>
+        <div class="metric">
+          <span class="metric-number">v1.0</span>
+          <span class="metric-label">shipped from scratch</span>
+        </div>
+        <div class="metric">
+          <span class="metric-number">Real‑time</span>
+          <span class="metric-label">competitor price data</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-label">Company</div>
+        <div class="meta-value">Prime Scout — competitive price intelligence startup</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">CTO — Web Development</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Period</div>
+        <div class="meta-value">Dec 2024 — Sep 2025</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Scope</div>
+        <div class="meta-value">Full stack — scraping, backend, frontend, database, dashboard design</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Stack</div>
+        <div class="meta-value">Next.js · Puppeteer · PostgreSQL · AWS RDS</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- CONTEXT -->
+    <div class="section reveal">
+      <div class="section-label">Context</div>
+      <h2 class="section-title">A startup tracking competitor prices — manually.</h2>
+      <p>
+        Prime Scout is a price intelligence startup that helps e-commerce businesses monitor
+        how their products are priced across competitor stores. When I joined as CTO in December 2024,
+        the entire process was <strong>manual</strong>: someone would visit competitor sites,
+        note down prices, and compile reports by hand. It was slow, error-prone, and didn't scale.
+      </p>
+      <p>
+        The goal was clear: <strong>build a system that does this automatically</strong>, reliably,
+        and presents the data in a way that lets clients make pricing decisions in real time —
+        not days later.
+      </p>
+    </div>
+
+    <!-- PROBLEM -->
+    <div class="section reveal">
+      <div class="section-label">The problem</div>
+      <h2 class="section-title">Manual processes don't scale. And they miss things.</h2>
+      <p>
+        Beyond the obvious speed issue, manual scouting had a deeper problem: <strong>inconsistency</strong>.
+        Different people checked different stores at different times. Prices would change between the
+        moment someone checked and the moment the report landed in a client's inbox. And there was
+        no structured way to compare products across stores — everything lived in spreadsheets.
+      </p>
+      <div class="insight">
+        <p><strong>The core challenge:</strong> each competitor's e-commerce site has a different structure — different HTML, different anti-scraping protections, different product naming conventions. A solution that works on one store might break completely on another.</p>
+      </div>
+    </div>
+
+    <!-- PROCESS -->
+    <div class="section reveal">
+      <div class="section-label">How I built it</div>
+      <h2 class="section-title">From zero to a working platform in one version.</h2>
+      <p>
+        I was responsible for the entire technical architecture — from the scraping bot to the
+        dashboard the client sees. Here's how the build progressed:
+      </p>
+
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">Research & manual validation</div>
+            <p class="step-desc">Started by understanding how competitor stores were structured and running manual scraping sessions to validate which data was accessible and where it lived in the DOM.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">Puppeteer bot — store by store</div>
+            <p class="step-desc">Built and tested Puppeteer scripts for each target store, adapting the scraping logic to each site's structure and implementing error handling and retries for reliability.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">Database architecture on AWS RDS</div>
+            <p class="step-desc">Designed a PostgreSQL schema on AWS RDS to store extracted product data in a way that allows efficient cross-store comparison — structured around products, stores, and price snapshots over time.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div>
+            <div class="step-title">Next.js app — frontend + backend</div>
+            <p class="step-desc">Built the full web application with Next.js: the API routes that run and schedule the scraper, and the frontend dashboard where clients log in, select their products, and visualize competitive pricing data.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <div>
+            <div class="step-title">Dashboard design</div>
+            <p class="step-desc">Designed the dashboard interface myself — thinking through how to display pricing comparisons in a way that surfaces actionable information at a glance, not just raw data tables.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD IMAGE -->
+    <div class="section reveal">
+      <div class="section-label">The result</div>
+      <h2 class="section-title">A platform that replaced the spreadsheet entirely.</h2>
+      <p>
+        Version 1.0 shipped with <strong>90% of the scouting process fully automated</strong>.
+        Clients can now log in and see real-time price comparisons across competitor stores —
+        updated automatically, without anyone lifting a finger.
+      </p>
+
+      <img
+        class="img-full"
+        src="../images/ps/ps-dashboard.png"
+        alt="Prime Scout dashboard showing competitor price comparison"
+        loading="lazy"
+      />
+      <p class="img-caption">The main dashboard — clients can see how their products compare across competitor stores in real time.</p>
+
+      <p>
+        The database was designed to store historical price data, not just the current state —
+        so clients can also track how a competitor's pricing has evolved over time.
+      </p>
+
+      <img
+        class="img-full"
+        src="../images/ps/ps-database.png"
+        alt="Prime Scout database architecture diagram"
+        loading="lazy"
+      />
+      <p class="img-caption">Database schema — designed for efficient cross-store product comparison and historical price tracking.</p>
+    </div>
+
+    <!-- SCRAPING -->
+    <div class="section reveal">
+      <div class="section-label">Under the hood</div>
+      <h2 class="section-title">The scraping system.</h2>
+      <p>
+        The bot runs Puppeteer scripts adapted to each e-commerce site's specific structure.
+        Each script handles the store's navigation, product identification, price extraction,
+        and data normalization before writing to the database.
+      </p>
+
+      <div class="img-grid">
+        <img
+          src="../images/ps/ps-scrap1.png"
+          alt="Scraping script for competitor store 1"
+          loading="lazy"
+        />
+        <img
+          src="../images/ps/ps-scrap2.png"
+          alt="Scraping script for competitor store 2"
+          loading="lazy"
+        />
+        <img
+          src="../images/ps/ps-scrap3.png"
+          alt="Scraping script for competitor store 3"
+          loading="lazy"
+        />
+      </div>
+      <p class="img-caption">Puppeteer scripts adapted to three different e-commerce store structures.</p>
+
+      <p>
+        The hardest part wasn't writing the scraper — it was making it <strong>resilient</strong>.
+        Stores change their HTML. Anti-bot protections kick in. Products go out of stock and
+        their URLs disappear. Every edge case needed a fallback so the system keeps running
+        without manual intervention.
+      </p>
+
+      <div class="stack-row">
+        <span class="stack-pill">Next.js</span>
+        <span class="stack-pill">Puppeteer</span>
+        <span class="stack-pill">PostgreSQL</span>
+        <span class="stack-pill">AWS RDS</span>
+        <span class="stack-pill">Node.js</span>
+        <span class="stack-pill">REST API</span>
+      </div>
+    </div>
+
+    <!-- REFLECTION -->
+    <div class="section reveal">
+      <div class="section-label">Reflection</div>
+      <h2 class="section-title">What I learned building this alone.</h2>
+      <div class="reflection">
+        <p>
+          This was the first time I owned an entire technical stack from scratch — not just the
+          frontend, not just the design, but <strong>every layer of the system</strong>. That changes
+          how you make decisions. When you're the one who has to maintain it, you think harder about
+          architecture before you write the first line.
+        </p>
+        <p>
+          The most valuable lesson was about <strong>the gap between "it works" and "it's reliable"</strong>.
+          The scraper worked on day one. Making it resilient enough that it didn't need babysitting —
+          that took much longer. Reliability isn't a feature you add at the end.
+        </p>
+        <p>
+          Designing the dashboard also taught me something I hadn't expected: <strong>data visualization
+          is a UX problem</strong>. The same price data presented poorly is useless. Presented well,
+          it becomes a decision-making tool. That overlap between data and design is something I want
+          to keep exploring.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <a class="footer-link" href="../index.html">← All work</a>
+    <a class="footer-link" href="singular-things.html">Next: Singular Things →</a>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+  
+</body>
+</html>
