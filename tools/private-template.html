@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Neurored — Private case study — Nicolás Zapata</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/base.css" />
+  <style>
+    :root { --max: 860px; }
+
+    /* HERO */
+    .hero {
+      padding-top: 130px; padding-bottom: 3.5rem;
+      padding-left: clamp(1.5rem, 5vw, 3.5rem); padding-right: clamp(1.5rem, 5vw, 3.5rem);
+      max-width: var(--max); margin: 0 auto;
+    }
+    .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); margin-bottom: 1.25rem; }
+    .hero-title { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-sub { margin-top: 1.25rem; font-size: 1rem; font-weight: 300; line-height: 1.7; color: var(--ink2); max-width: 560px; }
+
+    /* UNLOCK FORM */
+    .unlock {
+      max-width: var(--max); margin: 0 auto 5rem;
+      padding: 0 clamp(1.5rem, 5vw, 3.5rem);
+    }
+    .unlock form {
+      background: var(--bg2); border: 0.5px solid var(--border); border-radius: 12px;
+      padding: 2rem; display: flex; flex-direction: column; gap: 0.75rem; max-width: 420px;
+    }
+    .unlock label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); }
+    .unlock-row { display: flex; gap: 0.5rem; }
+    .unlock input {
+      flex: 1; min-width: 0; font: inherit; font-size: 0.95rem; color: var(--ink);
+      background: var(--bg); border: 1px solid var(--border); border-radius: 100px;
+      padding: 0.75rem 1.1rem;
+    }
+    .unlock input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+    .unlock button {
+      font: inherit; font-size: 0.9rem; font-weight: 500; cursor: pointer;
+      background: var(--ink); color: var(--bg); border: none; border-radius: 100px;
+      padding: 0.75rem 1.4rem; transition: background 0.2s;
+    }
+    .unlock button:hover { background: var(--accent); }
+    .unlock button:disabled { opacity: 0.6; cursor: wait; }
+    .content [tabindex="-1"]:focus { outline: none; }
+    .unlock-error { font-size: 0.85rem; color: #B3261E; min-height: 1.2em; }
+    .unlock-help { font-size: 0.85rem; font-weight: 300; color: var(--ink2); line-height: 1.6; }
+    .unlock-help a { color: var(--accent); }
+
+    /* PRIVATE CONTENT */
+    .content { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3.5rem) 4rem; }
+    .content[hidden] { display: none; }
+    .section { padding: 3rem 0; border-top: 0.5px solid var(--border); }
+    .section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.65rem; }
+    .section-title { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 1.9rem); line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1.25rem; }
+    .content p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--ink2); margin-bottom: 1.1rem; }
+    .content p strong { font-weight: 500; color: var(--ink); }
+    .img-full { width: 100%; border-radius: 10px; border: 0.5px solid var(--border); display: block; margin: 1.75rem 0; background: var(--bg2); }
+    .img-caption { font-size: 0.78rem; color: var(--ink3); text-align: center; margin-top: -1rem; margin-bottom: 1.75rem; }
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.75rem 0; }
+    .img-pair img { width: 100%; border-radius: 8px; border: 0.5px solid var(--border); background: var(--bg2); }
+    .img-pair { align-items: start; }
+    .img-pair + .img-caption { margin-top: -0.75rem; }
+    .img-narrow { max-width: 65%; margin-left: auto; margin-right: auto; }
+    .section[id] { scroll-margin-top: 80px; }
+    .content .used-in { font-size: 0.85rem; line-height: 1.6; color: var(--ink2); background: var(--bg2); border-radius: 8px; padding: 0.75rem 1rem; }
+    .toc { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; counter-reset: toc; }
+    .toc li { counter-increment: toc; }
+    .toc a { display: inline-block; font-size: 0.85rem; color: var(--ink2); text-decoration: none; border: 0.5px solid var(--border); border-radius: 100px; padding: 0.4rem 0.9rem; transition: background 0.2s, color 0.2s; }
+    .toc a::before { content: '0' counter(toc) '  '; color: var(--ink3); white-space: pre; }
+    .toc a:hover { background: var(--ink); color: var(--bg); }
+
+    @media (max-width: 680px) {
+      .unlock-row { flex-direction: column; }
+      .img-pair { grid-template-columns: 1fr; }
+      .img-narrow { max-width: 100%; }
+    }
+  </style>
+  <script src="../components/nav-bar.js"></script>
+  <script src="../components/site-footer.js"></script>
+  <script src="../components/image-lightbox.js"></script>
+</head>
+<body>
+
+  <nav-bar base="../"></nav-bar>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Private · Neurored · Shared on request</div>
+    <h1 class="hero-title">Neurored — <em>the design system.</em></h1>
+    <p class="hero-sub">
+      Company policy doesn't allow publishing this material, so this part of the case study
+      is password protected and encrypted.
+    </p>
+  </div>
+
+  <div class="unlock" id="unlock">
+    <form id="unlock-form">
+      <label for="pw">Password</label>
+      <div class="unlock-row">
+        <input id="pw" type="password" autocomplete="current-password" required aria-describedby="unlock-error" />
+        <button type="submit">Unlock</button>
+      </div>
+      <div class="unlock-error" id="unlock-error" role="alert"></div>
+      <p class="unlock-help">
+        Don't have it? <a href="mailto:nicozapatacruz@gmail.com?subject=Neurored%20case%20study%20password">Ask me for access</a>.
+      </p>
+    </form>
+  </div>
+
+  <main class="content" id="private-content" hidden></main>
+
+  <div class="page-footer">
+    <a class="footer-link" href="neurored.html">← Back to the Neurored case study</a>
+    <a class="footer-link" href="../index.html">All work →</a>
+  </div>
+
+  <site-footer></site-footer>
+
+  <script>
+    const PAYLOAD = __PAYLOAD__;
+
+    const fromB64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+
+    async function decrypt(password) {
+      const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+      const key = await crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt: fromB64(PAYLOAD.salt), iterations: PAYLOAD.iterations, hash: 'SHA-256' },
+        base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: fromB64(PAYLOAD.iv) }, key, fromB64(PAYLOAD.data));
+      return new TextDecoder().decode(plain);
+    }
+
+    const form = document.getElementById('unlock-form');
+    const input = document.getElementById('pw');
+    const error = document.getElementById('unlock-error');
+    const button = form.querySelector('button');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      error.textContent = '';
+      button.disabled = true;
+      button.textContent = 'Unlocking…';
+      try {
+        const html = await decrypt(input.value);
+        const content = document.getElementById('private-content');
+        content.innerHTML = html;
+        content.hidden = false;
+        document.getElementById('unlock').remove();
+        if (window.attachLightbox) window.attachLightbox();
+        content.querySelector('h2, h3')?.setAttribute('tabindex', '-1');
+        content.querySelector('h2, h3')?.focus();
+      } catch {
+        error.textContent = 'Wrong password. Try again.';
+        input.select();
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Unlock';
+      }
+    });
+  </script>
+
+</body>
+</html>

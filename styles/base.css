@@ -1,0 +1,63 @@
+/* Shared base styles — loaded by every page before its own <style> block */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F4F1EB;
+  --bg2: #EDE9E1;
+  --ink: #0E0E0C;
+  --ink2: #5A5950;
+  --ink3: #75736A; /* 4.5:1 on --bg (WCAG AA) */
+  --accent: #2B4FFF;
+  --accent-light: #E8ECFF;
+  --border: rgba(14,14,12,0.10);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; height: auto; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* Scroll reveal — only hidden when JS is running (see components/reveal.js) */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.js .reveal.visible { opacity: 1; transform: none; }
+
+/* Case study footer */
+.page-footer {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem clamp(1.5rem, 5vw, 3.5rem);
+  display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+  border-top: 0.5px solid var(--border);
+}
+.footer-link {
+  font-size: 0.875rem; color: var(--ink2);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-link:hover { color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js .reveal { opacity: 1; transform: none; }
+}
